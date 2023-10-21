@@ -1,5 +1,7 @@
 package com.thejaxx.jira.rest.plugin.ajax;
 
+import com.atlassian.jira.security.request.RequestMethod;
+import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.util.I18nHelper;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import org.apache.log4j.Logger;
@@ -15,6 +17,7 @@ import java.util.Map;
 /**
  * Created by Yoni Moses
  */
+@SupportedMethods({RequestMethod.GET})   
 public class AjaxResultsPageAction extends JiraWebActionSupport {
     private static final Logger logger = Logger.getLogger(AjaxResultsPageAction.class);
 
@@ -49,7 +52,7 @@ public class AjaxResultsPageAction extends JiraWebActionSupport {
         }
     }
 
-
+     
     public String getHtml(I18nHelper i18nBean) {
 
         logger.debug( "Query string " + getHttpRequest().getQueryString());

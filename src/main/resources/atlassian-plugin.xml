@@ -1,88 +1,65 @@
-<atlassian-plugin  key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
-	<plugin-info>
-		<description>${project.description}</description>
-		<version>${project.version}</version>
-		<vendor name="${project.organization.name}" url="${project.organization.url}"/>
-		<param name="plugin-icon">images/plugin-icon.png</param>
-		<param name="plugin-logo">images/plugin-logo.png</param>
-		<param name="plugin-banner">images/plugin-banner.png</param>
-		<param name="vendor-icon">images/vendor-icon.png</param>
-		<param name="vendor-logo">images/vendor-logo.png</param>
-		<param name="configure.url">/plugins/servlet/com.thejaxx.jira.rest.plugin.admin/configuration</param>
-	</plugin-info>
-
-
-	<servlet name="Configuration Servlet" key="rest-configuration-servlet"
-			 class="com.thejaxx.jira.rest.plugin.admin.ConfigurationServlet">
-		<description key="configuration-servlet.description">Configuration Servlet for Rest endpoints</description>
-		<url-pattern>/com.thejaxx.jira.rest.plugin.admin/configuration</url-pattern>
-	</servlet>
-
-
-	<customfield-type key="restfieldselection" name="Rest Values Selection Field"
-					  class="com.thejaxx.jira.rest.plugin.RestCustomField">
-		<description>Allows selection of values from a rest resource.</description>
-		<resource type="velocity" name="view" location="templates/view.vm"/>
-		<resource type="velocity" name="edit" location="templates/edit.vm"/>
-<!--		<resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>-->
-        <resource type="download" name="customfieldpreview.png" location="images/preview.png" />
-	</customfield-type>
-
-
-	<resource type="i18n" name="i18n" location="i18n"/>
-
-	<customfield-searcher key="restfieldsearcher" name="Rest Values Searcher"
-						  class="com.thejaxx.jira.rest.plugin.RestValuesSearcher">
-		<description>Allow to search for rest values.</description>
-		<resource type="velocity" name="label"
-				  location="templates/search/rest-label-searcher.vm"/>
-
-		<resource type="velocity" name="search" location="templates/search/search-rest.vm"/>
-		<resource type="velocity" name="view"  location="templates/search/search-view-rest.vm"/>
-
-		<valid-customfield-type package="${project.groupId}.${project.artifactId}" key="restfieldselection"/>
-	</customfield-searcher>
-
-
-
-
-	<webwork1 key="ajax-results" name="AJAX Results">
-		<description>AJAX results page.</description>
-		<actions>
-			<action name="com.thejaxx.jira.rest.plugin.ajax.AjaxResultsPageAction" alias="ajaxResultsPageAction">
-				<view name="input">/templates/ajax-results.vm</view>
-			</action>
-		</actions>
-	</webwork1>
-
-	<web-resource key="rest-web-resources" name="Rest JavaScript and CSS">
-        <context>atl.general</context>
-		<context>jira.general</context>
-<!--        <dependency>com.atlassian.auiplugin:ajs</dependency>-->
-<!--        <dependency>com.atlassian.auiplugin:jquery</dependency>-->
-
-<!--        <resource type="download" name="images/ui-bg_glass_100_fdf5ce_1x400.png" location="css/images/ui-bg_glass_100_fdf5ce_1x400.png"/>-->
-		<resource type="download" name="jquery-min-js" location="js/jquery.min.js"/>
-        <resource type="download" name="rest-values-plugin.js" location="js/rest-values-plugin.js"/>
-
-		<resource type="download" name="jquery.auto-completeCD.css" location="js/pixabay/jquery.auto-completeCD.css"/>
-		<resource type="download" name="jquery.auto-completeCD.js" location="js/pixabay/jquery.auto-completeCD.js"/>
-
-	</web-resource>
-
-
-	<!--
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2"> 
+  <plugin-info> 
+    <description>${project.description}</description>  
+    <version>${project.version}</version>  
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>  
+    <param name="plugin-icon">images/plugin-icon.png</param>  
+    <param name="plugin-logo">images/plugin-logo.png</param>  
+    <param name="plugin-banner">images/plugin-banner.png</param>  
+    <param name="vendor-icon">images/vendor-icon.png</param>  
+    <param name="vendor-logo">images/vendor-logo.png</param>  
+    <param name="configure.url">/plugins/servlet/com.thejaxx.jira.rest.plugin.admin/configuration</param> 
+  </plugin-info>  
+  <servlet name="Configuration Servlet" key="rest-configuration-servlet" class="com.thejaxx.jira.rest.plugin.admin.ConfigurationServlet"> 
+    <description key="configuration-servlet.description">Configuration Servlet for Rest endpoints</description>  
+    <url-pattern>/com.thejaxx.jira.rest.plugin.admin/configuration</url-pattern> 
+  </servlet>  
+  <customfield-type key="restfieldselection" name="Rest Values Selection Field" class="com.thejaxx.jira.rest.plugin.RestCustomField"> 
+    <description>Allows selection of values from a rest resource.</description>  
+    <resource type="velocity" name="view" location="templates/view.vm"/>  
+    <resource type="velocity" name="edit" location="templates/edit.vm"/>  
+    <!--		<resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>-->  
+    <resource type="download" name="customfieldpreview.png" location="images/preview.png"/> 
+  </customfield-type>  
+  <resource type="i18n" name="i18n" location="i18n"/>  
+  <customfield-searcher key="restfieldsearcher" name="Rest Values Searcher" class="com.thejaxx.jira.rest.plugin.RestValuesSearcher"> 
+    <description>Allow to search for rest values.</description>  
+    <resource type="velocity" name="label" location="templates/search/rest-label-searcher.vm"/>  
+    <resource type="velocity" name="search" location="templates/search/search-rest.vm"/>  
+    <resource type="velocity" name="view" location="templates/search/search-view-rest.vm"/>  
+    <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="restfieldselection"/> 
+  </customfield-searcher>  
+  <webwork1 key="ajax-results" name="AJAX Results" class="com.thejaxx.jira.rest.plugin.ajax.AjaxResultsPageAction" > 
+    <description>AJAX results page.</description>  
+    <actions> 
+      <action name="com.thejaxx.jira.rest.plugin.ajax.AjaxResultsPageAction" alias="ajaxResultsPageAction"> 
+        <view name="input">/templates/ajax-results.vm</view> 
+      </action> 
+    </actions> 
+  </webwork1>  
+  <web-resource key="rest-web-resources" name="Rest JavaScript and CSS"> 
+    <context>atl.general</context>  
+    <context>jira.general</context>  
+    <!--        <dependency>com.atlassian.auiplugin:ajs</dependency>-->  
+    <!--        <dependency>com.atlassian.auiplugin:jquery</dependency>-->  
+    <!--        <resource type="download" name="images/ui-bg_glass_100_fdf5ce_1x400.png" location="css/images/ui-bg_glass_100_fdf5ce_1x400.png"/>-->  
+    <!-- <resource type="download" name="jquery-min-js" location="js/jquery.min.js"/>   -->
+    <resource type="download" name="rest-values-plugin.js" location="js/rest-values-plugin.js"/>  
+    <resource type="download" name="jquery.auto-completeCD.css" location="js/pixabay/jquery.auto-completeCD.css"/>  
+    <resource type="download" name="jquery.auto-completeCD.js" location="js/pixabay/jquery.auto-completeCD.js"/> 
+  </web-resource>  
+  <!--
 		Hopefully in the future, this JQL function will be used to make it easier to create JQL queries easier with out knowing the index of the database record.
-	-->
-<!--	<jql-function key="databasevaluesselectionfield-jql-values-function" name="Rest Values JQL value Function" class="com.bnhp.jira.plugin.rest.sap.jqlfunc.RestValueFunction">-->
-<!--		<description>Returns a list of rest record key's. It needs 2 arguments: queryReference and queryValue</description>-->
-<!--		<fname>sapValues</fname>-->
-<!--		<list>true</list>-->
-<!--	</jql-function>-->
+	-->  
+  <!--	<jql-function key="databasevaluesselectionfield-jql-values-function" name="Rest Values JQL value Function" class="com.bnhp.jira.plugin.rest.sap.jqlfunc.RestValueFunction">-->  
+  <!--		<description>Returns a list of rest record key's. It needs 2 arguments: queryReference and queryValue</description>-->  
+  <!--		<fname>sapValues</fname>-->  
+  <!--		<list>true</list>-->  
+  <!--	</jql-function>-->  
+  <!--	<jql-function key="has-sap-field" name="Rest Values JQL value Function" class="com.bnhp.jira.plugin.rest.sap.jqlfunc.SAPExistsFunction">-->  
+  <!--		<description>Returns a list of issues with sap</description>-->  
+  <!--		<fname>sapExists</fname>-->  
+  <!--		<list>true</list>-->  
+  <!--	</jql-function>-->  
 
-<!--	<jql-function key="has-sap-field" name="Rest Values JQL value Function" class="com.bnhp.jira.plugin.rest.sap.jqlfunc.SAPExistsFunction">-->
-<!--		<description>Returns a list of issues with sap</description>-->
-<!--		<fname>sapExists</fname>-->
-<!--		<list>true</list>-->
-<!--	</jql-function>-->
 </atlassian-plugin>
