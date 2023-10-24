@@ -30,6 +30,18 @@ public class RestRowCache {
         return m_cache.get(projectKey);
     }
 
+    public void addCacheEntry(String projectKey, String id, RestRow row) {
+        if (!isDependentOnProjectKey()) {
+            projectKey = DEFAULT_PROJECT_KEY;
+        }
+        Map<String, RestRow> projectCache = getProjectSpecificCacheMap(projectKey);
+        if (projectCache == null) {
+            projectCache = new HashMap<String, RestRow>();
+            m_cache.put(projectKey, projectCache);
+        }
+        projectCache.put(id, row);
+    }
+
 //	public Collection<RestRow> getDatabaseRows(String projectKey, DatabaseRowCachePurpose purpose)
 //	{
 //

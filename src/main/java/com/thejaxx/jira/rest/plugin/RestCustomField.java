@@ -16,6 +16,7 @@ import com.thejaxx.jira.rest.plugin.ajax.AjaxViewHelper;
 import com.thejaxx.jira.rest.plugin.config.ConfigUtils;
 import com.thejaxx.jira.rest.plugin.utils.RestFetcher;
 import org.apache.log4j.Logger;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -73,10 +74,19 @@ public class RestCustomField extends GenericTextCFType implements SortableCustom
         Map<String, Object> result = super.getVelocityParameters(issue, customField, fieldLayoutItem);
         result.put("viewHelper", ajaxViewHelper);
         result.put("valuesViewHelper", valuesViewHelper);
+        
+        List<RestRow> values = RestFetcher.doQuery(parent);
+        //loop for values
+        RestRowCache rowCache = new RestRowCache();
+        for (RestRow row:values){
+            rowCache.addCacheEntry(parent, row.getKey(), row);            
+        }
+        this.valuesViewHelper.updateCache(rowCache);
+                
         if (issue != null && issue.getCustomFieldValue(customField) != null) {
             result.put("restValue", issue.getCustomFieldValue(customField));
         }
-        result.put("array", RestFetcher.doQuery(parent));
+        result.put("array", values);
         return result;
     }
 

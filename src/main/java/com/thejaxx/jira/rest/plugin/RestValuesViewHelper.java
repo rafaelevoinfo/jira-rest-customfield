@@ -42,6 +42,10 @@ public class RestValuesViewHelper {
 
 // -------------------------- PUBLIC METHODS --------------------------
 
+    public void updateCache(RestRowCache cache){
+        rowCache = cache;
+    }
+
     //	/**
 //	 * Returns the HTML that should be used for viewing the value of the custom field.
 //	 *
@@ -435,7 +439,8 @@ public class RestValuesViewHelper {
 
     public static RestValuesViewHelper getViewHelper(CustomField customField) {
         Map map = customField.getCustomFieldType().getVelocityParameters(null, customField, null);
-        return (RestValuesViewHelper) map.get(DATABASE_VALUES_VIEW_HELPER);
+        //return (RestValuesViewHelper) map.get(DATABASE_VALUES_VIEW_HELPER);
+        return (RestValuesViewHelper) map.get("valuesViewHelper");
     }
 
 // -------------------------- PRIVATE METHODS --------------------------
