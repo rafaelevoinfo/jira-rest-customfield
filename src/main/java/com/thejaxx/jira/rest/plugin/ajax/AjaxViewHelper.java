@@ -38,7 +38,7 @@ public class AjaxViewHelper {
 //        refreshCacheIfNeeded(projectKey);
         System.out.println("id = " + id);
         logger.info(String.format("getHtmlForView . ID " + id + ", Project Key $", projectKey));
-        RestRow restRow = rowCache.getProjectSpecificCacheMap(projectKey).get(id);
+        RestRow restRow = rowCache.getRow(projectKey, id);
         String result;
         if (restRow != null) {
             result = RestRowFormatter.formatRestRow(restRow, ConfigUtils.get().getRenderingEditPattern(), i18nHelper);

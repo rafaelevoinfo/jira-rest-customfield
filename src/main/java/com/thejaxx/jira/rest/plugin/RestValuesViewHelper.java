@@ -58,7 +58,7 @@ public class RestValuesViewHelper {
 //        refreshCacheIfNeeded(projectKey);
         System.out.println("id = " + id);
         logger.debug("getHtmlForView . ID " + id + ", Project Key " + projectKey);
-        RestRow restRow = rowCache.getProjectSpecificCacheMap(projectKey).get(id);
+        RestRow restRow = rowCache.getRow(projectKey, id);
         String result;
         if (restRow != null) {
             result = RestRowFormatter.formatRestRow(restRow, ConfigUtils.get().getRenderingEditPattern(), i18nHelper);
@@ -98,7 +98,7 @@ public class RestValuesViewHelper {
 //     */
     public String getTextForStatistics(String id, I18nHelper i18nHelper) {
 
-        RestRow restRow = rowCache.getProjectSpecificCacheMap(null).get(id);
+        RestRow restRow = rowCache.getRow(null, id);
         String result;
         if (restRow != null) {
             result = RestRowFormatter.formatRestRow(restRow, ConfigUtils.get().getStatisticsViewPattern(), i18nHelper);

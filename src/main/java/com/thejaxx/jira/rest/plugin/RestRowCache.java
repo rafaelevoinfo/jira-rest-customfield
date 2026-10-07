@@ -30,6 +30,16 @@ public class RestRowCache {
         return m_cache.get(projectKey);
     }
 
+    /**
+     * Valor guardado para o id, ou null se não houver. Quando a busca no endpoint falha a
+     * lista vem vazia e o mapa do projeto nem chega a existir; sem esta checagem os gadgets
+     * de estatística quebravam com NullPointerException em Map.get.
+     */
+    public RestRow getRow(String projectKey, String id) {
+        Map<String, RestRow> projectCache = getProjectSpecificCacheMap(projectKey);
+        return projectCache == null ? null : projectCache.get(id);
+    }
+
     public void addCacheEntry(String projectKey, String id, RestRow row) {
         if (!isDependentOnProjectKey()) {
             projectKey = DEFAULT_PROJECT_KEY;
